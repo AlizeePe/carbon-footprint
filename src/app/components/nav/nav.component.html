@@ -1,0 +1,7 @@
+<nav>
+  <ul>
+    <li><a routerLink="" routerLinkActive="active">Accueil</a></li>
+    <li><a [routerLink]="['/profile', username]" routerLinkActive="active">Mon profil</a></li>
+    <li><a (click)="logout()">Se déconnecter</a></li>
+  </ul>
+</nav>
