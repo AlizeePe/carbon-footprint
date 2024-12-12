@@ -2,5 +2,25 @@
 @if (error) {
   <div class="error">{{ error }}</div>
 }
-<button (click)="goToSummary()">Accéder au résumé</button>
-<button (click)="login()">Se connecter</button>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <label for="username">Login :</label>
+  <input id="username" name="username" type="text" formControlName="username">
+  @if (form.get('username')?.hasError('required')) {
+    <div class="error">Le login est obligatoire</div>
+  }
+  @if (form.get('username')?.hasError('minlength')) {
+    <div class="error">Le login doit comporter au minimum 3 caractères</div>
+  }
+  <br>
+  <label for="password">Mot de passe :</label>
+  <input id="password" name="password" type="text" formControlName="password">
+  @if (form.get('password')?.hasError('required')) {
+    <div class="error">Le mot de passe est obligatoire</div>
+  }
+  @if (form.get('password')?.hasError('minlength')) {
+    <div class="error">Le mot de passe doit comporter au moins 6 caractères</div>
+  }
+  <br>
+  <input type="submit" value="Se connecter">
+  <br>
+</form>

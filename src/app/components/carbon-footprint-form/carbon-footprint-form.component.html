@@ -1,0 +1,40 @@
+<form [formGroup]="travelForm" (ngSubmit)="onTravelFormSubmit()">
+  <label for="distanceKm">Distance :</label>
+  <input id="distanceKm" name="distanceKm" type="number" formControlName="distanceKm">
+  @if (travelForm.get('distanceKm')?.hasError('required')) {
+    <div class="error">La distance est obligatoire</div>
+  }
+  @if (travelForm.get('distanceKm')?.hasError('min')) {
+    <div class="error">La distance ne peut pas être inférieure à 1</div>
+  }
+  <br>
+  <label for="type">Moyen de transport</label>
+  <select name="type" id="type" formControlName="type">
+    <option value="car">Voiture</option>
+    <option value="train">Train</option>
+    <option value="plane">Avion</option>
+  </select>
+  @if (travelForm.get('type')?.hasError('pattern')) {
+    <div class="error">Le choix est incorrect</div>
+  }
+  <br>
+  @if (travelForm.get('type')?.value == 'car') {
+    <label for="consumptionPer100km">Consommation pour 100km :</label>
+    <input id="consumptionPer100km" name="consumptionPer100km" type="number" formControlName="consumptionPer100km">
+    @if (travelForm.get('consumptionPer100km')?.hasError('required')) {
+      <div class="error">La consommation pour 100km est obligatoire</div>
+    }
+    @if (travelForm.get('consumptionPer100km')?.hasError('min')) {
+      <div class="error">La consommation pour 100km ne peut pas être inférieure à 1</div>
+    }
+  }
+  <br>
+  <label for="date">Date :</label>
+  <input id="date" name="date" type="date" formControlName="date">
+  @if (travelForm.get('date')?.hasError('required')) {
+    <div class="error">La date est obligatoire</div>
+  }
+  <br>
+  <input type="submit" value="Ajouter mon voyage">
+  <br>
+</form>
